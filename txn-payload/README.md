@@ -1,4 +1,4 @@
-# L1X developers playground
+# L1X developers playground.
 
 Utility to provide CLI commands to the node.
 
