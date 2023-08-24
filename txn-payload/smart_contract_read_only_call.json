@@ -1,0 +1,5 @@
+{
+  "contract_instance_address": "376e041c441c9b680c5ea9b306828e8dde562f56",
+  "function": "ft_balance_of",
+  "arguments": "{ \"account_id\": \"177f88827a0d1fb1f10c44743be61dada9fdb318\" }"
+}

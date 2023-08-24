@@ -1,0 +1,6 @@
+{
+  "smart_contract_init": [
+    { "hex": "1f10c2f9d5f6d0ba4dfa173a82b52b2bf1a88a05" },
+    { "text": "{\"metadata\":{\"name\":\"DOGELONMARS\",\"decimals\":18,\"symbol\":\"DOGELONMARS\"},\"account_ids\":[\"177f88827a0d1fb1f10c44743be61dada9fdb318\"],\"amounts\":[\"1000\"]}" }
+  ]
+}
