@@ -16,6 +16,7 @@ docker run --name l1x-cassandra -d -p 9042:9042 -e CASSANDRA_CLUSTER_NAME=l1x-ca
 Start a node(/rpc_json):
 
 ```sh
+export REPLICATION_ENABLED=false
 # in dev mode, bootstraps alice, bob & charlie accounts
 RUST_LOG=info ./l1x_server --dev
 ```
