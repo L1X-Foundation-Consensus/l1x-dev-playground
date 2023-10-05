@@ -22,7 +22,7 @@ export IS_LOCAL=true
 export NODE_PRIVKEY=6913aeae91daf21a8381b1af75272fe6fae8ec4a21110674815c8f0691e32758
 ```
 
-* Initialize the genesis configuration 
+* Initialize the genesis configuration
 ```bash
 ./l1x_server init
 ```
@@ -95,5 +95,5 @@ Getter examples
 ./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/create_staking_pool.json
 ./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/stake.json
 ./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/un_stake.json
- 
+
 ```
