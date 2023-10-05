@@ -2,6 +2,8 @@
   "smart_contract_deployment": [
     "PUBLIC",
     "L1XVM",
-    { "file": "../validate/src/l1x_contract/l1x_ft.o" }
+    { "file": "../validate/src/l1x_contract/l1x_ft.o" },
+    0,
+    { "text": "00000000000000000000000000000000" }
   ]
 }
