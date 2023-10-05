@@ -3,7 +3,7 @@
     "PRIVATE",
     "L1XVM",
     {
-      "file": "txn-payload/compiled_contracts/l1x_contract/l1x_contract.o"
+      "file": "txn-payload/compiled-contracts/l1x-contract/l1x_contract.o"
     },
     0,
     {
