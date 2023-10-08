@@ -4,6 +4,10 @@
     "EVM",
     {
       "file": "../solidity/creationCodePool.txt"
+    },
+    0,
+    {
+      "text": "000000000000000000000000000000"
     }
   ]
 }
