@@ -1,0 +1,13 @@
+{
+  "smart_contract_deployment": [
+    "PRIVATE",
+    "L1XVM",
+    {
+      "file": "txn-payload/compiled-contracts/l1x-contract/l1x_contract.o"
+    },
+    0,
+    {
+      "text": "00000000000000000000000000000000"
+    }
+  ]
+}

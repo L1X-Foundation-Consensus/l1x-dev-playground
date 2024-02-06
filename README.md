@@ -2,106 +2,108 @@
 
 Utility to provide CLI commands to the node.
 
-## Setup
+## Prerequisites
 
-Cassandra reset/(re)start - perform reset when need to clear out tables.
+Before running the commands provided in this documentation, ensure that you have Docker and Docker Compose installed on your system.
 
-```sh
-# reset
-docker kill l1x-cassandra && docker rm l1x-cassandra && docker container prune -f && docker volume prune -f
-# run cassandra
-docker run --name l1x-cassandra -d -p 9042:9042 -e CASSANDRA_CLUSTER_NAME=l1x-cassandra cassandra
-```
+### Installing Docker
 
-## Locally spin up a node
+To install Docker on your system, follow the instructions for your operating system:
 
-* Export environment variables
-```bash
-export REPLICATION_ENABLED=false
-export IS_LOCAL=true
-export NODE_PRIVKEY=6913aeae91daf21a8381b1af75272fe6fae8ec4a21110674815c8f0691e32758
-```
+- **Linux**: Follow the official Docker documentation for [installing Docker Engine](https://docs.docker.com/engine/install/).
+- **Windows**: Follow the official Docker documentation for [installing Docker Desktop](https://docs.docker.com/desktop/install/).
+- **macOS**: Follow the official Docker documentation for [installing Docker Desktop](https://docs.docker.com/desktop/install/).
 
-* Initialize the genesis configuration
-```bash
-./l1x_server init
-```
+### Installing Docker Compose
 
-* Starts a local node with logs
-```bash
-RUST_LOG=info ./l1x_server start
-``` 
+Docker Compose is usually included with Docker Desktop for Windows and macOS. However, for Linux systems or if you need to install it separately, follow the instructions below:
+
+1. Download the Docker Compose binary from the [GitHub releases page](https://github.com/docker/compose/releases).
+2. Move the downloaded binary to the `/usr/local/bin/` directory:
+    ```bash
+    sudo mv /path/to/downloaded/docker-compose /usr/local/bin/docker-compose
+    ```
+3. Make the binary executable:
+    ```bash
+    sudo chmod +x /usr/local/bin/docker-compose
+    ```
+4. Verify the installation by checking the version of Docker Compose:
+    ```bash
+    docker-compose --version
+    ```
+
+Once Docker and Docker Compose are installed and configured, you can proceed with the setup and usage instructions provided in this documentation.
+
+# Dev Accounts:
+
+Dev 1: 
+    Address: 340092b1005c886165427D7344677e9E509D806f
+    Private Key: 2a2a9d5b9495fa004faf18f1b54c0cc449a03b3f62987024ec3b7019a0ea55ac
+
+Dev 2: 
+    Address: 21bdb86aD95A48319fF26a8f09153aF024c69EAb
+    Private Key: eaa3884b4da3d51db8636dd2ec470295c72f5d1a9f13fe73d4b557e2b0329e62
+
+Dev 3: 
+    Address: C82D767B1847997Db08b4817B1801839619dF2a8
+    Private Key: 903f81b5725e2495c1f888256d2609b0a7a7fbbb9df841ce0e06b6b11a013af6
+
+Dev 4: 
+    Address: 01fcBfa3298bA84C6C34b5C63B192cC69a43a8Dc
+    Private Key: 8d93caf8fa4e62a314af58e6476f262f853cc54b5d463b5f7300ce9e55e75d19
 
 
-## CLI usage
+Validator 1:
 
-```sh
-export PRIV_KEY=6d657bbe6f7604fb53bc22e0b5285d3e2ad17f64441b2dc19b648933850f9b46
-```
-* Prints options
-```bash
-./l1x_cli
-```
+    Address: Cab83DAEEDfb65BbaEdb1C286Ac9B7c90884378E
+    Private key: 645a507658a3d6827b7f149cedcd7f63fb44a05fb612ad22c4819fa416fbad85
 
-* Payload Examples
-```bash
-./l1x_cli payload-examples
-```
+Validator 2: 
 
-## Submit transactions using `cli`
+    Address: dabAf4742dDEf6A7e012BEa5e755fdee40dBB676
+    Private key: f9e33d39715bbad43d0ae76247eab08f1a70d578cbca1c46effdbfcd9eb832d6
 
-* Getter examples
-```bash
-./l1x_cli --rpc-type json --private-key $PRIV_KEY transaction-receipt --hash 6427c422661cf8cea0547a11ebb811813704dfd5c3ea934b60192bd9f74eaa2b
-./l1x_cli --rpc-type json --private-key $PRIV_KEY block-by-number --block-number 1400
-./l1x_cli --private-key $PRIV_KEY transactions-by-account -a 75104938baa47c54a86004ef998cc76c2e616289 --number-of-transactions 3 --starting-from 0
-```
 
-* submit transactions, requires creation of a payload inside config json file
-```shell
-./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/native_token_transfer.json
-```
+## Starting L1X Local Node
 
-* smart contract related, pass in contract_address to init, contract_instance_address to function_call
-```shell
-./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/smart_contract_deployment.json
+To start the L1X local node:
 
-```
+1. Ensure Docker and Docker Compose are installed on your system.
+2. Download the `startL1X.sh` script.
+3. Make the script executable: `chmod +x startL1X.sh`.
+4. Run the script: `./startL1X.sh`.
 
-* Take the address from server logs:
-```shell
-"*******EXECUTING CONTRACT DEPLOYMENT******** : "80441bd7201609434b89e2712840cf88ef0c8ec2" "
-./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/smart_contract_init.json
-./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/smart_contract_function_call.json
-```
+This script will spin up the required Docker containers and configure them for the L1X local node. Once the node is running, you can proceed with your interactions.
 
-* For example, with the L1X Fungible Token smart contract
-```shell
-./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/ft_smartcontract/deployment.json
-./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/ft_smartcontract/init.json
-./l1x_cli --private-key $PRIV_KEY read-only-func-call --payload-file-path txn-payload/ft_smartcontract/ft_name.json
-```
+## Stopping L1X Local Node
 
-* xtalk smart contract related, pass in contract_address to init, contract_instance_address to function_call
-```shell
-./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/xtalk_smart_contract_deployment.json
-./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/xtalk_smart_contract_init.json
-./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/xtalk_smart_contract_function_call.json
-```
+To stop the L1X local node:
 
-* evm smart contract related, pass in contract_instance_address to function_call. Note, there's no "init" step
-```sh
-./l1x_cli --private-key $PRIV_KEY submit-sol --payload-file-path txn-payload/evm_smart_contract_deployment.json
-```
-* Take the address from server logs:
-```sh
-"*******EXECUTING EVM CONTRACT DEPLOYMENT******** : "80441bd7201609434b89e2712840cf88ef0c8ec2" "
-./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/evm_smart_contract_function_call.json
-```
+1. Navigate to the directory containing the `stopL1X.sh` script.
+2. Make the script executable: `chmod +x stopL1X.sh`.
+3. Run the script: `./stopL1X.sh`.
 
-* staking related, pass the pool address to stake/un_stake
-```sh
-./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/create_staking_pool.json
-./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/stake.json
-./l1x_cli --private-key $PRIV_KEY submit-txn --payload-file-path txn-payload/un_stake.json
-```
+This script will stop the L1X local node by halting and removing the associated Docker containers.
+
+## Cleaning Up L1X Local Node
+
+To clean up the L1X local node:
+
+1. Navigate to the directory containing the `cleanupL1X.sh` script.
+2. Ensure Docker is installed on your system.
+3. Make the script executable: `chmod +x cleanupL1X.sh`.
+4. Run the script: `./cleanupL1X.sh`.
+
+This script will remove all Docker containers, networks, and volumes associated with the L1X local node setup.
+
+## Viewing L1X Logs
+
+To view logs from the L1X local node:
+
+1. Navigate to the directory containing the `viewL1XLogs.sh` script.
+2. Ensure Docker is installed on your system.
+3. Make the script executable: `chmod +x viewL1XLogs.sh`.
+4. Run the script: `./viewL1XLogs.sh`.
+
+This script will display logs from the Docker containers associated with the L1X local node setup.
+

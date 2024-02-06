@@ -1,0 +1,46 @@
+dev_mode = true
+multinode_mode = false
+replication_enable = false # make true for production
+whitelist_check = false            # make true for production
+max_size = 100
+fee_limit = 10000000
+rate_limit = 15
+time_frame_seconds = 100
+expiration_seconds = 100
+block_time = 3000
+
+
+node_port = "5010"
+node_ip_address = "/ip4/0.0.0.0/tcp/5010"
+
+node_private_key = "6913aeae91daf21a8381b1af75272fe6fae8ec4a21110674815c8f0691e32758"
+node_verifying_key = "02976d7877db9e40669feb13630396dade7e045cd268dd53e686647ff77a7e42a4"
+node_address = "78e044394595d4984f66c1b19059bc14ecc24063"
+
+node_metadata = "primary-node-postgres"
+cluster_address = "7eA34E4C121333eA0C14AF37Efc3f067eF966612"
+boot_nodes = []
+grpc_port = "0.0.0.0:50052"
+jsonrpc_port = "0.0.0.0:50051"
+
+
+
+# In Dev Mode Use Postgres = 1
+db_type = 1
+validator_pool_address = "Cab83DAEEDfb65BbaEdb1C286Ac9B7c90884378E"
+
+# Change `cassandra host` to appropriate host name when running in production or staging
+
+postgres_host = "v2_core_db"
+postgres_username = "dev-playground"
+postgres_password = "Eece6Ewe-coh7Eexo-Qua8Goph"
+postgres_pool_size = 10
+postgres_db_name = "l1x"
+postgres_test_db_name = "l1x_test"
+
+cassandra_host = "127.0.0.1:9042"
+cassandra_username = "cassandra"
+cassandra_password = "cassandra"
+cassandra_keyspace = "l1x"
+
+rocksdb_name = "l1x_rocks"

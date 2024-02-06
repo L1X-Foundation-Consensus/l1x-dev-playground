@@ -1,0 +1,42 @@
+version: '3'  # Specifying docker-compose version for clarity
+services:
+  v2_core_server:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: v2_core_server
+    volumes:
+      - ../l1x/bin/l1x-server:/app/server
+      - ../l1x/bin/l1x-cli:/app/cli
+      - ../txn-payload:/app/txn-payload
+      - ../l1x/scripts/run-server.sh:/app/run-server.sh
+      - ../l1x/config/config.toml:/app/config.toml
+      - ../l1x/chain_data:/app/l1x_data
+    ports:
+      - 0.0.0.0:50051:50051 # TODO: move to config
+      - 0.0.0.0:50052:50052 # TODO: move to config
+    command: ./run-server.sh
+    restart: on-failure
+    networks:
+      - v2_l1x_network
+    depends_on:
+      - v2_core_db
+
+  v2_core_db:
+    image: postgres
+    container_name: v2_core_db  # Optional for naming the container
+    environment:
+      POSTGRES_USER: dev-playground
+      POSTGRES_PASSWORD: Eece6Ewe-coh7Eexo-Qua8Goph
+    volumes:
+      - v2_core_db_data:/var/lib/postgresql/data  # Mapping host volume to container's data directory
+    networks:
+      - v2_l1x_network
+
+volumes:
+  v2_core_db_data:  # Defining the named volume
+    name: v2_core_db_data
+
+networks:
+  v2_l1x_network:
+    driver: bridge
