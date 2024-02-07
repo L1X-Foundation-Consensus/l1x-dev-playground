@@ -1,5 +1,7 @@
 # L1X developers playground
 
+Currently Supports : Linux Only 
+
 Utility to provide CLI commands to the node.
 
 ## Prerequisites
